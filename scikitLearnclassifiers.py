@@ -66,31 +66,17 @@ from sklearn.metrics import confusion_matrix
 import xgboost as xgb   
 
 def edloaddata(fdir):
-    fdir = 'P:\SoreLoser' + '/'+ fdir + '.xlsx'
+    fdir = '...'
     df = pd.read_excel(open(fdir,'rb'), sheetname='final')
-    #df = df.drop(df.index[0])
-    #df = df[(df.Code>3) | (df.Code == 1) ]
-    df['Code'] = df['Code'].map({1:1,2:2,3:3,4:2,6:2,9:2,11:2,5:3,7:3,10:3,12:3,8:1})
-    code = df['Code']
-    features = ['COPrANGLE', 'stdCOPrANGLE', 'rmsCOPrx', 'rmsCOPry', 'meanCOPx',
-       'stdCOPx', 'meanCOPy', 'stdCOPy', 'ratio_rmsCOP', 'ratio_stdCOP',
-       'ratio_meanCOP', u'rmsPulse']
-    df = df[features]
-    #df = pd.DataFrame(StandardScaler().fit_transform(df),columns=features)
-    df['Code'] = code    
+    
     return df
    
 def recover_train_target():
     global alldata
    
     train = alldata.copy()
-    targets = alldata.Code
-    #train.drop('Timestamp', 1, inplace=True)
-    #train.drop('Endsample', 1, inplace=True)
-    #train.drop('Offset', 1, inplace=True)
-    train.drop('group', 1, inplace=True)
-    train.drop('Code', 1, inplace=True)
-    #train.drop('Predicted_value', 1, inplace=True)
+    targets = alldata.Lables
+   
     return train, targets
     
     
